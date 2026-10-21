@@ -20,9 +20,9 @@ For this task, I set up a Kali Linux environment and used **Nmap** to perform re
 
 I started Kali Linux and logged in to the Metasploitable console. The console showed the Metasploitable login banner and a successful login as `msfadmin`.
 
-![Kali Linux login screen](screenshots/kali-login.png)
+![Kali Linux login screen](kali_VM.png)
 
-![Metasploitable console login](screenshots/metasploitable-login.png)
+![Metasploitable console login](metasploit.png)
 
 ### 2. Ran a basic Nmap scan
 
@@ -32,7 +32,7 @@ nmap 192.168.191.130
 
 This scan checked Nmap's default set of common TCP ports and reported which were open. The captured output identified multiple exposed services, including FTP, SSH, Telnet, SMTP, DNS, HTTP, SMB, MySQL, PostgreSQL, VNC and others.
 
-![Basic Nmap scan](screenshots/nmap-basic-scan.png)
+![Basic Nmap scan](nmap_basic_scan.png)
 
 ### 3. Ran a TCP SYN scan
 
@@ -42,7 +42,7 @@ nmap -sS 192.168.191.130
 
 The SYN scan checked common TCP ports using TCP SYN probes. In the captured output, Nmap reported the host as up and identified open TCP ports. This scan provided a port-discovery view without the service-version detail shown by the later scan.
 
-![Nmap SYN scan](screenshots/nmap-syn-scan.png)
+![Nmap SYN scan](namp_syn_scan.png)
 
 ### 4. Detected service versions and operating-system details
 
@@ -54,9 +54,12 @@ sudo nmap -O -sV 192.168.191.130
 - `-sV` probes open ports to identify services and their versions.
 - `sudo` provides the privileges commonly needed for OS detection and SYN-based techniques.
 
+![Nmap VERSION scan](namp_OS_scan_version_check.png)
+
+
 The captured output identified service/version information for several services and suggested a Linux 2.6.x system. OS fingerprinting is an estimate, not an absolute guarantee.
 
-![Nmap OS and version detection](screenshots/nmap-os-version-detection.png)
+![Nmap OS and version detection](nmap_OS_scan.png)
 
 ## Key Findings
 
@@ -89,15 +92,16 @@ The scan also reported other open ports, including 111, 512–514, 1099, 1524, 2
 
 ## Suggested Follow-up
 
-For additional practice in this isolated lab, I can save scan output for a report and perform targeted, non-destructive enumeration of selected services:
+For additional practice in this isolated lab, I have saved scan output for a report.
 
 ```bash
 sudo nmap -sV -sC -p 21,22,23,25,53,80,139,445,3306,5432,5900,8009,8180 \
-  -oA metasploitable-targeted 192.168.191.130
+  -oA metasploitable-targeted 192.168.X.X
 ```
+![Nmap SYN scan](script_result.png)
 
 The command saves normal, XML and grepable output files. Review NSE scripts before using them, and run scans only on systems for which testing is authorized.
 
 ## Evidence
 
-Screenshots are stored in the [`screenshots/`](screenshots/) directory and embedded above for easy review.
+Screenshots are stored in the directory and embedded above for easy review. I have also attached the scan results in the directory.
